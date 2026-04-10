@@ -8,10 +8,26 @@
  L3 = 20; 
  L4 = 0.25;
  
-
+ shimH = 5;
+ 
+module shim5() {
+ difference() {   
+  linear_extrude(height=shimH, convexity=5) {
+       import(file=outline, layer="5", $fn=188);
+     }
+     
+   translate([0,0,-0.01])
+     linear_extrude(height=shimH+1, convexity=5) {
+       import(file=outline, layer="1", $fn=188);
+     }
+ 
+     
+ }
+     
+}
 
 //rotate([180,0,0]) // print upside down.
-
+module post() {
 translate([0,0,0]) {
  difference() {
      rotate_extrude( convexity=5, $fn=248) {
@@ -50,7 +66,10 @@ translate([0,0,0]) {
      
      
  }
+ }
  
+ //post();
+ shim5();
  
 /*
       rotate_extrude( convexity=5, $fn=248) {
